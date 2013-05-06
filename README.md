@@ -32,7 +32,12 @@ grunt.initConfig({
 		chrome: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
 		clean: true,
 		certDir: 'cert',
-		buildDir: 'build'
+		buildDir: 'build',
+		resources: [
+			"js/**",
+			"images/**",
+			"*.html"
+		]
     }
   },
 })
@@ -74,6 +79,12 @@ Type: `String`
 Default value: `cert`
 
 Relative location to your extension's certificate.
+
+#### options.resources
+Type: `array`
+
+Project resources that should be packaged into the final .zip and .crx.
+Caution: Make sure your cert files are not included here
 
 #### options.chrome
 Type: `String`
