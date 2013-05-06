@@ -84,16 +84,17 @@ Relative location to your extension's certificate.
 Type: `array`
 
 Project resources that should be packaged into the final .zip and .crx.
-Caution: Make sure your cert files are not included here
+
+__Caution__: Make sure your cert files are not included here
 
 #### options.chrome
 Type: `String`
 Default value: OSX Path
 
 The path to your Google Chrome installation.
-OSX: /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
-OSX Canary: /Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary
-Windows: C:\Users\user\AppData\Local\Google\Chrome\Application\chrome.exe 
+* OSX: /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+* OSX Canary: /Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary
+* Windows: C:\Users\user\AppData\Local\Google\Chrome\Application\chrome.exe 
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
