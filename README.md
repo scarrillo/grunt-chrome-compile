@@ -1,5 +1,6 @@
 # grunt-chrome-compile
-
+Coming soon!
+<!--
 > Package a google chrome extension.
 
 ## Getting Started
@@ -87,3 +88,4 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 _(Nothing yet)_
+-->
