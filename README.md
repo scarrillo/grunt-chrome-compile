@@ -30,7 +30,9 @@ grunt.initConfig({
 		id: "00000000000000000000000000000000",
 		updateUrl: "http://example.com/extension/111111/",
 		chrome: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-		clean: true
+		clean: true,
+		certDir: 'cert',
+		buildDir: 'build'
     }
   },
 })
@@ -60,6 +62,18 @@ Type: `String`
 Default value: ``
 
 Optional url where your extension can be updated from outside of the Chrome Web Store
+
+#### options.buildDir
+Type: `String`
+Default value: `build`
+
+Relative location to your build directory. .zip, .crx, and updates.xml will be created here.
+
+#### options.certDir
+Type: `String`
+Default value: `cert`
+
+Relative location to your extension's certificate.
 
 #### options.chrome
 Type: `String`
