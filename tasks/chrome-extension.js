@@ -55,7 +55,7 @@ module.exports = function(grunt) {
 			);
 	});
 
-	grunt.registerTask('chrome-extension-copy', '', function() {
+	grunt.registerTask('chrome-extension-copy', 'copy extension resources to a build folder', function() {
 		var options = grunt.option('extensionOptions');
 
 		if(grunt.file.exists(options.extension.path)) {
@@ -73,7 +73,7 @@ module.exports = function(grunt) {
 		grunt.task.run('copy:extension');
 	});
 
-	grunt.registerTask('chrome-extension-compress', '', function() {
+	grunt.registerTask('chrome-extension-compress', 'compress build folder into a zip for the chrome web store', function() {
 		var options = grunt.option('extensionOptions');
 
 		grunt.config.set('compress.extension', {
@@ -92,7 +92,7 @@ module.exports = function(grunt) {
 		}
 	});
 
-	grunt.registerTask('chrome-extension-compile', '', function() {
+	grunt.registerTask('chrome-extension-compile', 'compile a crx using google chrome', function() {
 		var options = grunt.option('extensionOptions');
 
 		var done = this.async();
@@ -116,7 +116,7 @@ module.exports = function(grunt) {
 		});
 	});
 
-	grunt.registerTask('chrome-extension-manifest', '', function() {
+	grunt.registerTask('chrome-extension-manifest', 'update configuration files with extension information', function() {
 		var options = grunt.option('extensionOptions');
 
 		grunt.config.set('concat.extension', {
@@ -142,7 +142,7 @@ module.exports = function(grunt) {
 		grunt.task.run('concat:extension');
 	});
 
-	grunt.registerTask('chrome-extension-clean', '', function() {
+	grunt.registerTask('chrome-extension-clean', 'clean the build folder', function() {
 		var options = grunt.option('extensionOptions');
 
 		var cleanPath = options.extension.path;
