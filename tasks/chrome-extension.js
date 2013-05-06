@@ -135,7 +135,7 @@ module.exports = function(grunt) {
 			},
 			files: [
 				{ src: ['manifest.json'], dest: options.extension.path + 'manifest.json' },
-				{ src: ['updates.xml'], dest: options.extension.path + 'updates.xml' }
+				{ src: ['updates.xml'], dest: options.buildDir + '/updates.xml' }
 			]
 
 		});
