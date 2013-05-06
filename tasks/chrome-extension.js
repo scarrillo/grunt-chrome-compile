@@ -9,6 +9,9 @@
 'use strict';
 
 module.exports = function(grunt) {
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-compress');
+	grunt.loadNpmTasks('grunt-contrib-concat');
 
 	grunt.registerTask('chrome-extension', 'Package a google chrome extension', function() {
 		grunt.config.requires('chrome-extension.options.name');
@@ -20,9 +23,11 @@ module.exports = function(grunt) {
 		// Merge task-specific and/or target-specific options with these defaults.
 		var options = this.options({
 			buildDir: 'build',
-			certDir: '.cert',
+			certDir: 'cert',
 			resources: [
-				'manifest.json'
+				"js/**",
+				"images/**",
+				"*.html"
 			],
 			extension: {
 				path: '',
@@ -84,16 +89,16 @@ module.exports = function(grunt) {
 			]
 		});
 		grunt.task.run('compress:extension');
+	});
+
+	grunt.registerTask('chrome-extension-compile', 'compile a crx using google chrome', function() {
+		var options = grunt.option('extensionOptions');
 
 		var certPath = options.extension.path + 'key.pem';
 		if(grunt.file.exists(certPath)) {
 			// remove cert, before compiling crx. It's only required by the chrome web store in the zip
 			grunt.file.delete(certPath);
 		}
-	});
-
-	grunt.registerTask('chrome-extension-compile', 'compile a crx using google chrome', function() {
-		var options = grunt.option('extensionOptions');
 
 		var done = this.async();
 		var chromeOptions = {

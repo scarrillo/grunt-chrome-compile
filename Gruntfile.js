@@ -33,17 +33,7 @@ module.exports = function(grunt) {
 				id: "00000000000000000000000000000000",
 				updateUrl: "http://example.com/extension/111111/",
 				chrome: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-				//buildDir: 'build',
-				//certDir: 'cert',
-				clean: true,
-				resources: [
-					"manifest.json",
-					"js/**",
-					"images/**",
-					"lib/**",
-					"!lib/closure/**",
-					"!.cert/**"
-				]
+				clean: true
 			}
 		},
 		// Unit tests.
@@ -60,9 +50,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-nodeunit');
-	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-contrib-compress');
-	grunt.loadNpmTasks('grunt-contrib-concat');
 
 	// Whenever the "test" task is run, first clean the "tmp" dir, then run this
 	// plugin's task(s), then test the result.
