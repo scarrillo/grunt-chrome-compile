@@ -10,7 +10,6 @@
 
 module.exports = function(grunt) {
 
-
 	grunt.registerTask('chrome-extension', 'Package a google chrome extension', function() {
 		grunt.config.requires('chrome-extension.options.name');
 		grunt.config.requires('chrome-extension.options.version');
@@ -51,7 +50,8 @@ module.exports = function(grunt) {
 			'chrome-extension-copy',
 			'chrome-extension-manifest',
 			'chrome-extension-compress',
-			'chrome-extension-compile'
+			'chrome-extension-compile',
+			'chrome-extension-clean'
 			);
 	});
 
@@ -142,43 +142,13 @@ module.exports = function(grunt) {
 		grunt.task.run('concat:extension');
 	});
 
-/*
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
+	grunt.registerTask('chrome-extension-clean', '', function() {
+		var options = grunt.option('extensionOptions');
 
-  grunt.registerMultiTask('chrome_compile', 'Your task description goes here.', function() {
-    // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
-      punctuation: '.',
-      separator: ', '
-    });
-
-    // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
-      // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
-        }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
-
-      // Handle options.
-      src += options.punctuation;
-
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
-
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
-    });
-  });
- */
-
+		var cleanPath = options.extension.path;
+		if(options.clean && grunt.file.exists(cleanPath)) {
+			// remove cert, before compiling crx. It's only required by the chrome web store in the zip
+			grunt.file.delete(cleanPath);
+		}
+	});
 };
