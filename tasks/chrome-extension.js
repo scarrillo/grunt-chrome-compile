@@ -43,7 +43,7 @@ module.exports = function(grunt) {
 		options.extension.zip = options.buildDir +'/'+ options.name +'.zip';
 
 		//console.dir(options);
-		grunt.log.writeln('chrome-extension: '+options.name);
+		grunt.log.writeln('chrome-extension: '+options.name+':'+options.version);
 		grunt.log.writeln('\tchrome: '+options.chrome);
 		grunt.log.writeln('\tpath: '+options.extension.path);
 		grunt.log.writeln('\tcert: '+options.extension.cert);

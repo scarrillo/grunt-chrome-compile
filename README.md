@@ -1,6 +1,5 @@
 # grunt-chrome-compile
 Coming soon!
-<!--
 > Package a google chrome extension.
 
 ## Getting Started
@@ -21,71 +20,59 @@ grunt.loadNpmTasks('grunt-chrome-compile');
 ## The "chrome_compile" task
 
 ### Overview
-In your project's Gruntfile, add a section named `chrome_compile` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `chrome-extension` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
-  chrome_compile: {
+  'chrome-extension': {
     options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
+		name: "demo-ext",
+		version: "0.0.1",
+		id: "00000000000000000000000000000000",
+		updateUrl: "http://example.com/extension/111111/",
+		chrome: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+		clean: true
+    }
   },
 })
 ```
-
 ### Options
 
-#### options.separator
+#### options.name
 Type: `String`
-Default value: `',  '`
+Default value: `demo-ext`
 
-A string value that is used to do something with whatever.
+The name of your google chrome extension
 
-#### options.punctuation
+#### options.version
 Type: `String`
-Default value: `'.'`
+Default value: `0.0.1`
 
-A string value that is used to do something else with whatever else.
+Your extension's version number.
 
-### Usage Examples
+#### options.id
+Type: `String`
+Default value: `00000000000000000000000000000000`
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+The ID assigned by the Chrome Web Store
 
-```js
-grunt.initConfig({
-  chrome_compile: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
+#### options.updateUrl
+Type: `String`
+Default value: ``
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+Optional url where your extension can be updated from outside of the Chrome Web Store
 
-```js
-grunt.initConfig({
-  chrome_compile: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
+#### options.chrome
+Type: `String`
+Default value: OSX Path
+
+The path to your Google Chrome installation.
+OSX: /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+OSX Canary: /Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary
+Windows: C:\Users\user\AppData\Local\Google\Chrome\Application\chrome.exe 
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
--->
+0.2.1 Initial release!

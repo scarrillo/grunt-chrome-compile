@@ -1,7 +1,7 @@
 {
   "name": "grunt-chrome-compile",
   "description": "Package a google chrome extension.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://github.com/scarrillo/grunt-chrome-compile",
   "author": {
     "name": "scarrillo",
