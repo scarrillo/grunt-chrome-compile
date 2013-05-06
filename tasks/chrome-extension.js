@@ -23,37 +23,48 @@ module.exports = function(grunt) {
 			buildDir: 'build',
 			certDir: '.cert',
 			resources: [
-				"manifest.json"
-			]
+				'manifest.json'
+			],
+			extension: {
+				path: '',
+				cert: '',
+				updateUrl: '',
+				zip: ''
+			}
 		});
 
-		var buildDir = options.buildDir; //'build/';
-		var extPath = buildDir +"/"+ options.name +'/';
-		var extCert = options.certDir +"/"+ options.name +'.pem';
-		var extCodebase = options.updateUrl +""+ options.name +'.crx';
-		var extDeployZip = options.name +'.zip';
+		options.extension.path = options.buildDir +'/'+ options.name +'/';
+		options.extension.cert = options.certDir +'/'+ options.name +'.pem';
+		options.extension.updateUrl = options.updateUrl + options.name +'.crx';
+		options.extension.zip = options.buildDir +'/'+ options.name +'.zip';
 
 		//console.dir(options);
-		grunt.log.writeln('chrome-extension: config: ');
+		grunt.log.writeln('chrome-extension: '+options.name);
 		grunt.log.writeln('\tchrome: '+options.chrome);
-		grunt.log.writeln('\tpath: '+extPath);
-		grunt.log.writeln('\tcert: '+extCert);
-		grunt.log.writeln('\tupdate path: '+extCodebase);
-		grunt.log.writeln('\tcws zip: '+extDeployZip);
+		grunt.log.writeln('\tpath: '+options.extension.path);
+		grunt.log.writeln('\tcert: '+options.extension.cert);
+		grunt.log.writeln('\tupdate path: '+options.extension.updateUrl);
+		grunt.log.writeln('\tcws zip: '+options.extension.zip);
+
+		grunt.option('extensionOptions', options);
 		grunt.task.run(
-			'chrome-extension-copy:'+extPath+":"+options.resources+":"+extCert,
-			'chrome-extension-compress:'+extPath+":"+(buildDir+extDeployZip)+":"+options.name,
-			'chrome-extension-compile:'+options.chrome+":"+extPath+":"+extCert);
+			'chrome-extension-copy',
+			'chrome-extension-manifest',
+			'chrome-extension-compress',
+			'chrome-extension-compile'
+			);
 	});
 
-	grunt.registerTask('chrome-extension-copy', '', function(path, resources, cert) {
-		if(grunt.file.exists(path)) {
-			grunt.file['delete'](path);
+	grunt.registerTask('chrome-extension-copy', '', function() {
+		var options = grunt.option('extensionOptions');
+
+		if(grunt.file.exists(options.extension.path)) {
+			grunt.file.delete(options.extension.path);
 		}
-		grunt.file.mkdir(path);
-		grunt.config.set("copy.extension", { files: [
-			{expand: true, cwd: '.', src: resources, dest: path},
-			{flatten:true, expand: true, cwd: '.', src: cert, dest: path,
+		grunt.file.mkdir(options.extension.path);
+		grunt.config.set('copy.extension', { files: [
+			{expand: true, cwd: '.', src: options.resources, dest: options.extension.path},
+			{flatten:true, expand: true, cwd: '.', src: options.extension.cert, dest: options.extension.path,
 				rename: function(dest) {//, matchedSrcPath, options
 					return dest + 'key.pem';
 				}
@@ -62,30 +73,34 @@ module.exports = function(grunt) {
 		grunt.task.run('copy:extension');
 	});
 
-	grunt.registerTask('chrome-extension-compress', '', function(path, archive, name){
-		grunt.config.set("compress.extension", {
-			options: { archive: archive },
+	grunt.registerTask('chrome-extension-compress', '', function() {
+		var options = grunt.option('extensionOptions');
+
+		grunt.config.set('compress.extension', {
+			options: { archive: options.extension.zip },
 			files: [
 				// dest == the folder name within the zip. explicit here, but equivilant to passing empty string 
-				{expand: true, cwd: path,  src: ["**/*"], dest: name }
+				{expand: true, cwd: options.extension.path,  src: ['**/*'], dest: options.name }
 			]
 		});
 		grunt.task.run('compress:extension');
 
-		var certPath = path + "key.pem";
+		var certPath = options.extension.path + 'key.pem';
 		if(grunt.file.exists(certPath)) {
 			// remove cert, before compiling crx. It's only required by the chrome web store in the zip
-			grunt.file['delete'](certPath);
+			grunt.file.delete(certPath);
 		}
 	});
 
-	grunt.registerTask('chrome-extension-compile', '', function(chrome, path, cert) {
+	grunt.registerTask('chrome-extension-compile', '', function() {
+		var options = grunt.option('extensionOptions');
+
 		var done = this.async();
 		var chromeOptions = {
-			cmd: chrome,
+			cmd: options.chrome,
 			args: [
-				'--pack-extension='+path,
-				'--pack-extension-key='+cert,
+				'--pack-extension='+ options.extension.path,
+				'--pack-extension-key='+ options.extension.cert,
 				'--no-message-box'
 			]
 		};
@@ -93,12 +108,38 @@ module.exports = function(grunt) {
 		grunt.util.spawn(chromeOptions, function(error, result, code) {
 			if(error && code !== 0) {
 				//console.dir(result);
-				grunt.log.write(result.stdout+" ").error();
+				grunt.log.write(result.stdout+' ').error();
 			} else {
-				grunt.log.write(result+" ").ok();
+				grunt.log.write(result+' ').ok();
 			}
 			done(true);
 		});
+	});
+
+	grunt.registerTask('chrome-extension-manifest', '', function() {
+		var options = grunt.option('extensionOptions');
+
+		grunt.config.set('concat.extension', {
+			options: {
+				//banner: '// concat job',
+				process: function(src, filepath) {
+					/*
+					return '// Source: ' + filepath + '\n' +
+						src.replace(/##VERSION##/g, '##FOUND##');
+					*/
+				src = src.replace(/##ID##/g, options.id);
+				src = src.replace(/##VERSION##/g, options.version);
+				src = src.replace(/##CODEBASE##/g, options.extension.updateUrl);
+				return src;
+				},
+			},
+			files: [
+				{ src: ['manifest.json'], dest: options.extension.path + 'manifest.json' },
+				{ src: ['updates.xml'], dest: options.extension.path + 'updates.xml' }
+			]
+
+		});
+		grunt.task.run('concat:extension');
 	});
 
 /*

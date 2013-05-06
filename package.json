@@ -1,43 +1,46 @@
 {
-	"name": "grunt-chrome-compile",
-	"description": "Package a google chrome extension.",
-	"version": "0.1.0",
-	"homepage": "https://github.com/scarrillo/grunt-chrome-compile",
-	"author": {
-		"name": "scarrillo",
-		"email": "shawn.carrillo+git@gmail.com",
-		"url": "http://shawn.co"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git@github.com:scarrillo/grunt-chrome-compile.git"
-	},
-	"bugs": {
-		"url": "https://github.com/scarrillo/grunt-chrome-compile/issues"
-	},
-	"licenses": [{
-			"type": "MIT",
-			"url": "https://github.com/scarrillo/grunt-chrome-compile/blob/master/LICENSE-MIT"
-	}],
-	"main": "Gruntfile.js",
-	"engines": {
-		"node": ">= 0.8.0"
-	},
-	"scripts": {
-		"test": "grunt test"
-	},
-	"devDependencies": {
-		"grunt": "~0.4.1",
-		"grunt-contrib-nodeunit": "~0.1.2",
-		"grunt-contrib-jshint": "~0.4.3",
-		"grunt-contrib-copy": "~0.4.1",
-		"grunt-contrib-compress": "~0.5.0",
-		"grunt-contrib-clean": "~0.4.0"
-	},
-	"peerDependencies": {
-		"grunt": "~0.4.1"
-	},
-	"keywords": [
-		"gruntplugin"
-	]
+  "name": "grunt-chrome-compile",
+  "description": "Package a google chrome extension.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/scarrillo/grunt-chrome-compile",
+  "author": {
+    "name": "scarrillo",
+    "email": "shawn.carrillo+git@gmail.com",
+    "url": "http://shawn.co"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:scarrillo/grunt-chrome-compile.git"
+  },
+  "bugs": {
+    "url": "https://github.com/scarrillo/grunt-chrome-compile/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/scarrillo/grunt-chrome-compile/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-compress": "~0.5.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-concat": "~0.3.0"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
 }
