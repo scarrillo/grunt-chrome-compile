@@ -1,5 +1,4 @@
 # grunt-chrome-compile
-Coming soon!
 > Package a google chrome extension.
 
 ## Getting Started
