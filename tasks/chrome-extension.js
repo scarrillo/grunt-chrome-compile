@@ -132,10 +132,10 @@ module.exports = function(grunt) {
 					return '// Source: ' + filepath + '\n' +
 						src.replace(/##VERSION##/g, '##FOUND##');
 					*/
-				src = src.replace(/##ID##/g, options.id);
-				src = src.replace(/##VERSION##/g, options.version);
-				src = src.replace(/##CODEBASE##/g, options.extension.updateUrl);
-				return src;
+					src = src.replace(/##ID##/g, options.id);
+					src = src.replace(/##VERSION##/g, options.version);
+					src = src.replace(/##CODEBASE##/g, options.extension.updateUrl);
+					return src;
 				},
 			},
 			files: [
