@@ -42,7 +42,6 @@ module.exports = function(grunt) {
 		options.extension.updateUrl = options.updateUrl + options.name +'.crx';
 		options.extension.zip = options.buildDir +'/'+ options.name +'.zip';
 
-		//console.dir(options);
 		grunt.log.writeln('chrome-extension: '+options.name+':'+options.version);
 		grunt.log.writeln('\tchrome: '+options.chrome);
 		grunt.log.writeln('\tpath: '+options.extension.path);
@@ -57,7 +56,7 @@ module.exports = function(grunt) {
 			'chrome-extension-compress',
 			'chrome-extension-compile',
 			'chrome-extension-clean'
-			);
+		);
 	});
 
 	grunt.registerTask('chrome-extension-copy', 'copy extension resources to a build folder', function() {
@@ -136,13 +135,12 @@ module.exports = function(grunt) {
 					src = src.replace(/##VERSION##/g, options.version);
 					src = src.replace(/##CODEBASE##/g, options.extension.updateUrl);
 					return src;
-				},
+				}
 			},
 			files: [
 				{ src: ['manifest.json'], dest: options.extension.path + 'manifest.json' },
 				{ src: ['updates.xml'], dest: options.buildDir + '/updates.xml' }
 			]
-
 		});
 		grunt.task.run('concat:extension');
 	});
@@ -152,7 +150,6 @@ module.exports = function(grunt) {
 
 		var cleanPath = options.extension.path;
 		if(options.clean && grunt.file.exists(cleanPath)) {
-			// remove cert, before compiling crx. It's only required by the chrome web store in the zip
 			grunt.file.delete(cleanPath);
 		}
 	});
