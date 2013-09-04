@@ -1,7 +1,7 @@
 {
   "name": "grunt-chrome-compile",
   "description": "Package a google chrome extension.",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "homepage": "https://github.com/scarrillo/grunt-chrome-compile",
   "author": {
     "name": "scarrillo",
@@ -31,7 +31,7 @@
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-nodeunit": "~0.1.2",
-    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-contrib-jshint": "~0.6.4",
     "grunt-contrib-copy": "~0.4.1",
     "grunt-contrib-compress": "~0.5.0",
     "grunt-contrib-clean": "~0.4.0",
@@ -40,7 +40,6 @@
   "peerDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-nodeunit": "~0.1.2",
-    "grunt-contrib-jshint": "~0.4.3",
     "grunt-contrib-copy": "~0.4.1",
     "grunt-contrib-compress": "~0.5.0",
     "grunt-contrib-clean": "~0.4.0",
